@@ -1,0 +1,9 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<!-- protect page by the authentication init  -->
+<?init class="edu.learn.rest_demo.auth.AuthenticationInit"?>
+
+<zk>
+    <window title="Hello ZK - Spring Boot!" border="normal">
+        You are using ZK version <label value="${session.webApp.version}"/>
+    </window>
+</zk>

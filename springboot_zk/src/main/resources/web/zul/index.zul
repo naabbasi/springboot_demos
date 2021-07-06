@@ -1,0 +1,7 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<!-- protect page by the authentication init  -->
+<?init class="edu.learn.rest_demo.auth.AuthenticationInit"?>
+
+<zk>
+    <label value="${session.webApp.version}"/>
+</zk>

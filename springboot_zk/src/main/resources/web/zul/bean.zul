@@ -1,0 +1,9 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+    <zscript>
+        String msg = simpleBean.message;
+    </zscript>
+    <window title="Bean in ZScript" width="640px" border="normal" >
+        <label value="${msg}"/>
+    </window>
+</zk>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('edu.learn.rest_demo.ui.model.UsersModel')"
+        border="normal" hflex="min" style="margin:0px auto;" title="Welcome! New User"
+        onCreate="@command('checkLogin')">
+    <grid id="formGrid" hflex="min" ctrlKeys="^h">
+        <auxhead>
+            <auxheader colspan="2" label="Registration Form" iconSclass="z-icon-user-circle-o"/>
+        </auxhead>
+
+        <columns visible="false">
+            <column/>
+            <column/>
+        </columns>
+
+        <rows>
+            <row id="nameRow">
+                <!-- constraint="no empty" -->
+                User Name
+                <textbox id="username" hflex="1" constraint="no empty" value="@bind(vm.username)"/>
+            </row>
+
+            <row>
+                <!-- constraint="no empty" -->
+                Password
+                <textbox id="password" hflex="1" constraint="no empty"  type="password" value="@bind(vm.password)"/>
+            </row>
+
+            <row spans="2" align="right">
+                <hlayout>
+                    <label value="Help (Ctrl+h)"/>
+                    <button id="resetButton" label="Reset" />
+                    <button id="submitButton" label="Submit" onClick="@command('loginUser')"/>
+                </hlayout>
+            </row>
+        </rows>
+    </grid>
+</window>
