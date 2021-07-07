@@ -3,6 +3,7 @@ package com.example.application;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 
+import com.vaadin.flow.theme.material.Material;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -18,8 +19,8 @@ import com.vaadin.flow.theme.lumo.Lumo;
  *
  */
 @SpringBootApplication
-@Theme(value = "myapp", variant = Lumo.DARK)
-@PWA(name = "My App", shortName = "My App", offlineResources = {"images/logo.png"})
+@Theme(value = "springboot-vaadin-fusion", variant = Material.DARK)
+@PWA(name = "springboot-vaadin-fusion", shortName = "springboot-vaadin-fusion", offlineResources = {"images/logo.png"})
 public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
 
     public static void main(String[] args) {

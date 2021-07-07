@@ -66,25 +66,25 @@ const getStyleModule = (id) => {
       .join(" ");
   return cssText;
 };
-import stylesCss from 'themes/myapp/styles.css';
+import stylesCss from 'themes/springboot-vaadin-fusion/styles.css';
 import '@vaadin/vaadin-lumo-styles/typography.js';
 import '@vaadin/vaadin-lumo-styles/color.js';
 import '@vaadin/vaadin-lumo-styles/spacing.js';
 import '@vaadin/vaadin-lumo-styles/badge.js';
 
 window.Vaadin = window.Vaadin || {};
-window.Vaadin['_vaadintheme_myapp_globalCss'] = window.Vaadin['_vaadintheme_myapp_globalCss'] || [];
+window.Vaadin['_vaadintheme_springboot-vaadin-fusion_globalCss'] = window.Vaadin['_vaadintheme_springboot-vaadin-fusion_globalCss'] || [];
 export const applyTheme = (target) => {
   
-  const injectGlobal = (window.Vaadin['_vaadintheme_myapp_globalCss'].length === 0) || (!window.Vaadin['_vaadintheme_myapp_globalCss'].includes(target) && target !== document);
+  const injectGlobal = (window.Vaadin['_vaadintheme_springboot-vaadin-fusion_globalCss'].length === 0) || (!window.Vaadin['_vaadintheme_springboot-vaadin-fusion_globalCss'].includes(target) && target !== document);
   if (injectGlobal) {
     injectGlobalCss(stylesCss.toString(), target);
     
-    window.Vaadin['_vaadintheme_myapp_globalCss'].push(target);
+    window.Vaadin['_vaadintheme_springboot-vaadin-fusion_globalCss'].push(target);
   }
-  if (!document['_vaadintheme_myapp_componentCss']) {
+  if (!document['_vaadintheme_springboot-vaadin-fusion_componentCss']) {
     
-    document['_vaadintheme_myapp_componentCss'] = true;
+    document['_vaadintheme_springboot-vaadin-fusion_componentCss'] = true;
   }
   // Lumo styles are injected into shadow roots.
 // For the document, we need to be compatible with flow-generated-imports and add missing <style> tags.
