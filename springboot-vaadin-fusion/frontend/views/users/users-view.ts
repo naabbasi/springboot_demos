@@ -14,14 +14,14 @@ import '@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout';
 import '@vaadin/vaadin-split-layout';
 import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-upload';
-import Person from 'Frontend/generated/com/example/application/data/entity/Person';
-import PersonModel from 'Frontend/generated/com/example/application/data/entity/PersonModel';
-import * as PersonEndpoint from 'Frontend/generated/PersonEndpoint';
+import User from 'Frontend/generated/edu/learn/vaadin/application/data/entity/User';
+import UserModel from 'Frontend/generated/edu/learn/vaadin/application/data/entity/UserModel';
+import * as UserEndpoint from 'Frontend/generated/UserEndpoint';
 import { customElement, html, property, query } from 'lit-element';
 import { View } from '../view';
 
-@customElement('persons-view')
-export class PersonsView extends View {
+@customElement('users-view')
+export class UsersView extends View {
   @query('#grid')
   private grid!: GridElement;
 
@@ -30,7 +30,7 @@ export class PersonsView extends View {
 
   private gridDataProvider = this.getGridData.bind(this);
 
-  private binder = new Binder<Person, PersonModel>(this, PersonModel);
+  private binder = new Binder<User, UserModel>(this, UserModel);
 
   render() {
     return html`
@@ -44,26 +44,20 @@ export class PersonsView extends View {
             .dataProvider="${this.gridDataProvider}"
             @active-item-changed=${this.itemSelected}
           >
-            <vaadin-grid-sort-column auto-width path="firstName"></vaadin-grid-sort-column
-            ><vaadin-grid-sort-column auto-width path="lastName"></vaadin-grid-sort-column
-            ><vaadin-grid-sort-column auto-width path="dob"></vaadin-grid-sort-column>
+            <vaadin-grid-sort-column auto-width path="username"></vaadin-grid-sort-column>
+            <vaadin-grid-sort-column auto-width path="password"></vaadin-grid-sort-column>
+            <vaadin-grid-sort-column auto-width path="firstName"></vaadin-grid-sort-column>
+            <vaadin-grid-sort-column auto-width path="lastName"></vaadin-grid-sort-column>
           </vaadin-grid>
         </div>
         <div class="flex flex-col" style="width: 400px;">
           <div class="p-l flex-grow">
-            <vaadin-form-layout
-              ><vaadin-text-field
-                label="First name"
-                id="firstName"
-                ...=${field(this.binder.model.firstName)}
-              ></vaadin-text-field
-              ><vaadin-text-field
-                label="Last name"
-                id="lastName"
-                ...=${field(this.binder.model.lastName)}
-              ></vaadin-text-field
-              ><vaadin-date-picker label="Dob" id="dob" ...=${field(this.binder.model.dob)}></vaadin-date-picker
-            ></vaadin-form-layout>
+            <vaadin-form-layout>
+              <vaadin-text-field label="Username" id="username" ...=${field(this.binder.model.username)}></vaadin-text-field>
+              <vaadin-text-field label="Password" id="password" ...=${field(this.binder.model.password)}></vaadin-text-field>
+              <vaadin-text-field label="First name" id="firstName" ...=${field(this.binder.model.firstName)}></vaadin-text-field>
+              <vaadin-text-field label="Last name"  id="lastName"  ...=${field(this.binder.model.lastName)}></vaadin-text-field>
+            </vaadin-form-layout>
           </div>
           <vaadin-horizontal-layout class="w-full flex-wrap bg-contrast-5 py-s px-l" theme="spacing">
             <vaadin-button theme="primary" @click="${this.save}">Save</vaadin-button>
@@ -76,22 +70,22 @@ export class PersonsView extends View {
 
   private async getGridData(params: GridDataProviderParams, callback: GridDataProviderCallback) {
     const index = params.page * params.pageSize;
-    const data = await PersonEndpoint.list(index, params.pageSize, params.sortOrders as any);
+    const data = await UserEndpoint.list(index, params.pageSize, params.sortOrders as any);
     callback(data ?? []);
   }
 
   async connectedCallback() {
     super.connectedCallback();
     this.classList.add('flex', 'flex-col', 'h-full');
-    this.gridSize = (await PersonEndpoint.count()) ?? 0;
+    this.gridSize = (await UserEndpoint.count()) ?? 0;
   }
 
   private async itemSelected(event: CustomEvent) {
-    const item: Person = event.detail.value as Person;
+    const item: User = event.detail.value as User;
     this.grid.selectedItems = item ? [item] : [];
 
     if (item) {
-      const fromBackend = await PersonEndpoint.get(item.id!);
+      const fromBackend = await UserEndpoint.get(item.id!);
       fromBackend ? this.binder.read(fromBackend) : this.refreshGrid();
     } else {
       this.clearForm();
@@ -101,14 +95,14 @@ export class PersonsView extends View {
   private async save() {
     try {
       const isNew = !this.binder.value.id;
-      await this.binder.submitTo(PersonEndpoint.update);
+      await this.binder.submitTo(UserEndpoint.update);
       if (isNew) {
         // We added a new item
         this.gridSize++;
       }
       this.clearForm();
       this.refreshGrid();
-      showNotification(`Person details stored.`, { position: 'bottom-start' });
+      showNotification(`User details stored.`, { position: 'bottom-start' });
     } catch (error) {
       if (error instanceof EndpointError) {
         showNotification(`Server error. ${error.message}`, { position: 'bottom-start' });

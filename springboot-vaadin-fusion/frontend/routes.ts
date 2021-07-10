@@ -1,6 +1,7 @@
 import { Route } from '@vaadin/router';
 import './views/main-layout';
-import './views/persons/persons-view';
+import './views/users/users-view';
+import './views/dashbaord/dashboard-view';
 
 export type ViewRoute = Route & { title?: string; children?: ViewRoute[] };
 
@@ -8,13 +9,13 @@ export const views: ViewRoute[] = [
   // place routes below (more info https://vaadin.com/docs/latest/fusion/routing/overview)
   {
     path: '',
-    component: 'persons-view',
-    title: '',
+    component: 'dashboard-view',
+    title: 'Dashboard',
   },
   {
-    path: 'persons',
-    component: 'persons-view',
-    title: 'Persons',
+    path: 'users',
+    component: 'users-view',
+    title: 'Users',
   },
   {
     path: 'map',

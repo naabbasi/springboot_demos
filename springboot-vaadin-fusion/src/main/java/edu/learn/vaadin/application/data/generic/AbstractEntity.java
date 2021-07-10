@@ -1,4 +1,4 @@
-package com.example.application.data;
+package edu.learn.vaadin.application.data.generic;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
